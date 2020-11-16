@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>big.js Technical Documentation</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="tech-doc.css">
+    <script src="https://kit.fontawesome.com/c88217dd87.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="tech-doc.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- #8 Nav element  -->
+    <nav id="navbar">
+      <!-- #9 Navbar header that describes subject -->
+      <!-- #11 Header comes before nav links -->
+      <div class="header">
+        <header>big.js</header>
+        <i class="fas fa-bars fa-2x"></i>
+        <i class="fas fa-times fa-2x"></i>
+      </div>
+      <!-- #10 Nav links for each topic in main -->
+      <!-- #12 Text in nav matches section title -->
+      <!-- #13 Link scrolls to section of documentation -->
+      <ul>
+        <li>
+          <a href="#about_bigjs" class="nav-link">About bigJS</a>
+        </li>
+        <li>
+          <a href="#constructor" class="nav-link">Constructor</a>
+          <i class="fas fa-chevron-down show"></i>			
+          <i class="fas fa-chevron-up hide"></i>
+          <ul class="sub-menu">
+            <li>
+              <a href="#big" class="sub-menu-link">Big</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#class_properties" class="nav-link">Class Properties</a>
+          <i class="fas fa-chevron-down show"></i>			
+          <i class="fas fa-chevron-up hide"></i>
+          <ul class="sub-menu">
+            <li>
+              <a href="#dp" class="sub-menu-link">DP (decimal places)</a>
+              <a href="#rm" class="sub-menu-link">RM (rounding mode)</a>
+              <a href="#ne" class="sub-menu-link">NE (negative exponent)</a>
+              <a href="#pe" class="sub-menu-link">PE (positive exponent)</a>
+              <a href="#strict" class="sub-menu-link">strict</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#instance_methods" class="nav-link">Instance Methods</a>
+          <i class="fas fa-chevron-down show"></i>			
+          <i class="fas fa-chevron-up hide"></i>
+          <ul class="sub-menu">
+            <li>
+              <a href="#abs" class="sub-menu-link">abs</a>
+              <a href="#cmp" class="sub-menu-link">cmp</a>
+              <a href="#div" class="sub-menu-link">div</a>
+              <a href="#eq" class="sub-menu-link">eq</a>
+              <a href="#gt" class="sub-menu-link">gt</a>
+              <a href="#gte" class="sub-menu-link">gte</a>
+              <a href="#lt" class="sub-menu-link">lt</a>
+              <a href="#lte" class="sub-menu-link">lte</a>
+              <a href="#minus" class="sub-menu-link">minus</a>
+              <a href="#mod" class="sub-menu-link">mod</a>
+              <a href="#plus" class="sub-menu-link">plus</a>
+              <a href="#pow" class="sub-menu-link">pow</a>
+              <a href="#prec" class="sub-menu-link">prec</a>
+              <a href="#round" class="sub-menu-link">round</a>
+              <a href="#sqrt" class="sub-menu-link">sqrt</a>
+              <a href="#times" class="sub-menu-link">times</a>
+              <a href="#toExponential" class="sub-menu-link">toExponential</a>
+              <a href="#toFixed" class="sub-menu-link">toFixed</a>
+              <a href="#toJSON" class="sub-menu-link">toJSON</a>
+              <a href="#toPrecision" class="sub-menu-link">toPrecision</a>
+              <a href="#toNumber" class="sub-menu-link">toNumber</a>
+              <a href="#toString" class="sub-menu-link">toString</a>
+              <a href="#valueOf" class="sub-menu-link">valueOf</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#instance_properties" class="nav-link">Instance Properties</a>
+        </li>
+        <li><a href="#errors" class="nav-link">Errors</a></li>
+      </ul>	
+    </nav>
+    
+    <!-- #1 Main element -->
+    <main id="main-doc">
+      <!-- #2 Min. 5 section elements in main -->
+      <!-- #5 Section has id matching nav titles-->
+      <section class="main-section" id="about_bigjs">
+        <!-- #3 Header within .main-section -->
+        <header>About bigJS</header>
+        <!-- #6 Sections have 10 p elements total -->
+        <!-- #7 Sections have 5 code elements total -->
+        <!-- #8 Sections have 5 li elements total -->
+        <article>
+          <p><strong>A small, fast, easy-to-use library for arbitrary-precision decimal arithmetic.</strong></p>
+          <p><a href="https://github.com/MikeMcl/big.js/">Hosted on Github</a></p>
+          <p><strong>Reference:</strong> Official documentation can be found at <a href="http://mikemcl.github.io/big.js/">http://mikemcl.github.io/big.js/</a></p>
+          <p>In all examples below, <code>var</code> and semicolons are not shown, and if a commented-out value is in quotes it means <code>toString</code> has been called on the preceding expression.</p>
+        </article>
+      </section>
+      
+      <section class="main-section" id="constructor">
+        <header>Constructor</header>
+          <section class="sub-section" id="big">
+            <header>Big</header>
+            <article>			
+              <p>
+                <strong>Big</strong>&emsp;&emsp;<code>Big(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>Big</em>
+              </p>
+              <p>
+                <code>n</code> : <em>number</em> | <em>string</em> | <em>Big</em> : a decimal value
+              </p>
+              <p>
+                By default, the argument <code>n</code> can be a number, string or Big number, but if <code><a href="#strict">Big.strict</a></code> is set to <code>true</code> an error will be thrown if <code>n</code> is not a string or Big number.
+              </p>
+              <p>
+                <code>Infinity</code>, <code>NaN</code> and hexadecimal literal strings, e.g. '0xff', are not valid.
+              </p>
+              <p>String values in octal literal form will be interpreted as decimals, e.g. '011' is 11, not 9.</p>
+              <p>String values may be in exponential, as well as normal (non-exponential) notation.</p>
+              <p>There is no limit to the number of digits of a <em>string</em> value (other than that of JavaScript's maximum array size), but the largest recommended exponent magnitude is 1000000.</p>
+              <p>Returns a new Big number object with value <code>n</code>.</p>
+              <p>Throws if <code>n</code> is invalid.</p>
+              <p>Using <code>new</code> with Big is optional, but note that if no argument is passed when doing so, or if the argument is <code>undefined</code>, then a new Big constructor will be returned rather than a new Big number instance. See <a href="http://mikemcl.github.io/big.js/#multiple" target="_blank">creating additional Big number constructors</a>.</p>
+              <pre>
+    x = new Big(9)                       // '9'
+    y = new Big(x)                       // '9'
+    new Big('5032485723458348569331745.33434346346912144534543')
+    new Big('4.321e+4')                  // '43210'
+    new Big('-735.0918e-430')            // '-7.350918e-428'
+    Big(435.345)                         // '435.345'
+    new Big()                            // 'Error: [big.js] Invalid value'
+    Big()                                // No error, and a new Big constructor is returned</pre>
+            </article>
+        </section>
+      </section>
+      
+      <section class="main-section" id="class_properties">
+        <header>Class Properties</header>
+        <section class="sub-section" id="dp">
+            <header>DP (decimal places)</header>
+            <article>			
+              <p><em>number</em> : integer, 0 to 1e+6 inclusive</p>
+              <p>Default value: <code>20</code></p>
+              <p>The <strong>maximum</strong> number of decimal places of the results of operations involving division.</p>
+              <p>It is relevant only to the <code>div</code> and <code>sqrt</code> methods, and the <code>pow</code> method when the exponent is negative.</p>
+          <p>The value will be checked for validity when one of the above methods is called.</p>
+          <p>An error will be thrown if the value is found to be invalid.</p>
+          <pre>Big.DP = 40</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="rm">
+            <header>RM (rounding mode)</header>
+            <article>			
+              <p><em>number</em> : 0, 1, 2 or 3</p>
+              <p>Default value: <code>1</code></p>
+              <p>The rounding mode used in the above operations and by <code><a href="#round">round</a></code>, <code><a href="#toExponential">toExponential</a></code>, <code><a href="#toFixed">toFixed</a></code> and <code><a href="#toPrecision">toPrecision</a></code>.</p>
+              <p>The value will be checked for validity when one of the above methods is called.</p>
+              <p>An error will be thrown if the value is found to be invalid.</p>
+              <div class="grid-table" id="rm-grid-table">
+                <div class="col-title" id="value">Value</div>
+                <div class="col-title" id="value_description">Description</div>
+                <div class="col-title" id="equivalent">BigDecimal equivalent</div>
+                
+                <div class="col-value" id="0">0</div>
+                <div class="col-value" id="0-description">
+                  <p>Round towards zero</p>
+                  <p>i.e., truncate, no rounding</p>
+                </div>
+                <div class="col-value" id="0-equivalent">ROUND_DOWN</div>
+              
+                <div class="col-value" id="1">1</div>
+                <div class="col-value" id="1-description">
+                  <p>Round towards nearest neighbor</p>
+                  <p>If equidistant, rounds away from zero</p>
+                </div>
+                <div class="col-value" id="1-equivalent">ROUND_HALF_UP</div>
+          
+              <div class="col-value" id="2">2</div>
+              <div class="col-value" id="2-description">
+                <p>Round towards nearest neighbor</p>
+                <p>If equidistant, rounds toward even neighbor</p>
+              </div>
+              <div class="col-value" id="2-equivalent">ROUND_HALF_EVEN</div>
+                
+              <div class="col-value" id="3">3</div>
+              <div class="col-value" id="3-description">
+                <p>Round away from zero</p>
+              </div>
+              <div class="col-value" id="3-equivalent">ROUND_UP</div>
+              </div>
+          
+              <pre>Big.RM = 0</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="ne">
+            <header>NE (negative exponent)</header>
+            <article>			
+              <p><em>number</em> : integer, -1e+6 to 0 inclusive</p>
+              <p>Default value: <code>-7</code></p>
+              <p>The negative exponent value at and below which <code>toString</code> returns exponential notation.</p>
+              <pre>Big.NE = -7
+    x = new Big(0.00000123)            // '0.00000123'       e is -6
+    x = new Big(0.000000123)           // '1.23e-7'</pre>
+              <p>JavaScript numbers use exponential notation for negative exponents of <code>-7</code> and below.</p>
+              <p>Regardless of the value of <code>Big.NE</code>, the <code>toFixed</code> method will always return a value in normal notation and the <code>toExponential</code> method will always return a value in exponential form.</p>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="pe">
+            <header>PE (positive exponent)</header>
+            <article>			
+              <p><em>number</em> : integer, 0 to 1e+6 inclusive</p>
+              <p>Default value: <code>21</code></p>
+              <p>The positive exponent value at and above which <code>toString</code> returns exponential notation.</p>
+              <pre>Big.PE = 2
+    x = new Big(12.3)                  // '12.3'        e is 1
+    x = new Big(123)                   // '1.23e+2'</pre>
+              <p>JavaScript numbers use exponential notation for positive exponents of <code>21</code> and above.</p>
+              <p>Regardless of the value of <code>Big.PE</code>, the <code>toFixed</code> method will always return a value in normal notation and the <code>toExponential</code> method will always return a value in exponential form.</p>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="strict">
+            <header>strict</header>
+            <article>			
+              <p><em>true</em> | <em>false</em></p>
+              <p>Default value: <code>false</code></p>
+              <p>When set to <code>true</code>, an error will be thrown if a primitive number is passed to the Big constructor, or if <code>valueOf</code> is called, or if <code>toNumber</code> is called on a Big which cannot be converted to a primitive number without a loss of precision.</p>
+              <pre>Big.strict = true
+    x = new Big(1)                    // 'TypeError: [big.js] String expected'
+    y = new Big('1.000000000000000000001')
+    2 + y                             // 'Error: [big.js] valueOf disallowed'
+    y.toNumber()                      // 'Error: [big.js] Imprecise conversion'
+    
+    Big.strict = false
+    x = new Big(0.1)
+    y = new Big('1.000000000000000000001')
+    2 + y                             // '21.000000000000000000001'
+    y.toNumber()                      // 1</pre>
+            </article>
+        </section>
+      </section>
+      
+      <section class="main-section" id="instance_methods">
+        <header>Instance Methods</header>
+        <article>
+          <p>The methods inherited by a Big number instance from its constructor's prototype object.</p>
+          <p>A Big number is immutable in the sense that it is not changed by its methods.</p>
+        </article>
+        <section class="sub-section" id="abs">
+            <header>abs</header>
+            <article>			
+              <p>
+                <code>.abs()</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>Big</em>
+                </p>
+              <p>Returns a Big number whose value is the absolute value, i.e. the magnitude, of this Big number.</p>
+              <pre>x = new Big(-0.8)
+    x.abs()                     // '0.8'</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="cmp">
+            <header>cmp</header>
+            <article>			
+              <p>
+                <code>.cmp(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>number</em>
+              </p>
+              <p><code>n</code> : <em>number</em> | <em>string</em> | <em>Big</em></p>
+              <div class="grid-table" id="cmp-grid-table">
+                <div class="col-title" id="returns">Returns</div>
+                <div class="col-title" id="return-when">When...</div>
+                <div class="col-value" id="cmp-pos1">1</div>
+                <div class="col-value" id="explanation-pos1"><p>If the value of this Big number is greater than the value of <code>n</code></p></div>
+                <div class="col-value" id="cmp-neg1">-1</div>
+                <div class="col-value" id="explanation-neg1"><p>If the value of this Big number is less than the value of <code>n</code></p></div>
+                <div class="col-value" id="cmp-0">0</div>
+                <div class="col-value" id="explanation-0"><p>If this Big number and <code>n</code> have the same value</p></div>
+              </div>
+              <p>Throws if <code>n</code> is invalid.</p>
+              <pre>x = new Big(6)
+    y = new Big(5)
+    x.cmp(y)                   // 1
+    y.cmp(x.minus(1))          // 0</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="div">
+            <header>div</header>
+            <article>			
+              <p>
+                <code>.div(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>Big</em>
+              </p>
+              <p><code>n</code> : <em>number</em> | <em>string</em> | <em>Big</em></p>
+              <p>Returns a Big number whose value is the value of this Big number divided by <code>n</code>.</p>
+              <p>If the result has more fraction digits than is specified by <code><a href="#dp">Big.DP</a></code>, it will be rounded to <code><a href="#dp">Big.DP</a></code> decimal places using rounding mode <code><a href="#rm">Big.RM</a></code>.</p>
+              <p>Throws if <code>n</code> is zero or otherwise invalid.</p>
+              <pre>x = new Big(355)
+    y = new Big(113)
+    x.div(y)                   // '3.14159292035398230088'
+    Big.DP = 2
+    x.div(y)                   // '3.14'
+    x.div(5)                   // '71'</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="eq">
+            <header>eq</header>
+            <article>			
+              <p>
+                <code>.eq(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>boolean</em>
+              </p>
+              <p><code>n</code> : <em>number</em> | <em>string</em> | <em>Big</em></p>
+              <p>Returns <code>true</code> if the value of this Big number equals the value of <code>n</code>, otherwise returns <code>false</code>.</p>
+              <p>Throws if <code>n</code> is invalid.</p>
+              <pre>0 === 1e-324               // true
+    x = new Big(0)
+    x.eq('1e-324')             // false
+    Big(-0).eq(x)              // true  ( -0 === 0 )</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="gt">
+            <header>gt</header>
+            <article>			
+              <p>
+                <code>.gt(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>boolean</em>
+              </p>
+              <p><code>n</code> : <em>number</em> | <em>string</em> | <em>Big</em></p>
+              <p>Returns <code>true</code> if the value of this Big number is greater than the value of <code>n</code>, otherwise returns <code>false</code>.</p>
+              <p>Throws if <code>n</code> is invalid.</p>
+              <pre>0.1 > 0.3 - 0.2              // true
+    x = new Big(0.1)
+    x.gt(Big(0.3).minus(0.2))    // false
+    Big(0).gt(x)                 // false</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="gte">
+            <header>gte</header>
+            <article>			
+              <p>
+                <code>.gte(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>boolean</em>
+              </p>
+              <p><code>n</code> : <em>number</em> | <em>string</em> | <em>Big</em></p>
+              <p>Returns <code>true</code> if the value of this Big number is greater than or equal to the value of <code>n</code>, otherwise returns <code>false</code>.</p>
+              <p>Throws if <code>n</code> is invalid.</p>
+              <pre>0.3 - 0.2 >= 0.1               // false
+    x = new Big(0.3).minus(0.2)
+    x.gte(0.1)                     // true
+    Big(1).gte(x)                  // true</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="lt">
+            <header>lt</header>
+            <article>			
+              <p>
+                <code>.lt(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>boolean</em>
+              </p>
+              <p><code>n</code> : <em>number</em> | <em>string</em> | <em>Big</em></p>
+              <p>Returns <code>true</code> if the value of this Big number is less than the value of <code>n</code>, otherwise returns <code>false</code>.</p>
+              <p>Throws if <code>n</code> is invalid.</p>
+              <pre>0.3 - 0.2 < 0.1                // true
+    x = new Big(0.3).minus(0.2)
+    x.lt(0.1)                      // false
+    Big(0).lt(x)                   // true</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="lte">
+            <header>lte</header>
+            <article>			
+              <p>
+                <code>.lte(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>boolean</em>
+              </p>
+              <p><code>n</code> : <em>number</em> | <em>string</em> | <em>Big</em></p>
+              <p>Returns <code>true</code> if the value of this Big number is less than or equal to the value of <code>n</code>, otherwise returns <code>false</code>.</p>
+              <p>Throws if <code>n</code> is invalid.</p>
+              <pre>0.1 <= 0.3 - 0.2               // false
+    x = new Big(0.1)
+    x.lte(Big(0.3).minus(0.2))     // true
+    Big(-1).lte(x)                 // true</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="minus">
+            <header>minus</header>
+            <article>		
+              <p>
+                <code>.minus(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>Big</em>
+              </p>
+              <p><code>n</code> : <em>number</em> | <em>string</em> | <em>Big</em></p>
+              <p>Returns a Big number whose value is the value of this Big number minus <code>n</code>.</p>
+              <p>Throws if <code>n</code> is invalid.</p>
+              <pre>0.3 - 0.1                  // 0.19999999999999998
+    x = new Big(0.3)
+    x.minus(0.1)               // '0.2'</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="mod">
+            <header>mod</header>
+            <article>			
+              <p>
+                <code>.mod(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>Big</em>
+              </p>
+              <p><code>n</code> : <em>number</em> | <em>string</em> | <em>Big</em></p>
+              <p>Returns a Big number whose value is the value of this Big number modulo <code>n</code>, i.e. the integer remainder of dividing this Big number by <code>n</code>.</p>
+              <p>The result will have the same sign as this Big number, and it will match that of JavaScript's % operator (within the limits of its precision) and BigDecimal's remainder method.</p>
+              <p>Throws if <code>n</code> is zero or otherwise invalid.</p>
+              <pre>1 % 0.9                    // 0.09999999999999998
+    x = new Big(1)
+    x.mod(0.9)                 // '0.1'</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="plus">
+            <header>plus</header>
+            <article>			
+              <p>
+                <code>.plus(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>Big</em>
+              </p>
+              <p><code>n</code> : <em>number</em> | <em>string</em> | <em>Big</em></p>
+              <p>Returns a Big number whose value is the value of this Big number plus <code>n</code>.</p>
+              <p>Throws if <code>n</code> is invalid.</p>
+              <pre>0.1 + 0.2                  // 0.30000000000000004
+    x = new Big(0.1)
+    y = x.plus(0.2)            // '0.3'
+    Big(0.7).plus(x).plus(y)   // '1.1'</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="pow">
+            <header>pow</header>
+            <article>			
+              <p>
+                <code>.pow(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>Big</em>
+              </p>
+              <p><code>n</code> : <em>number</em> : integer, -1e+6 to 1e+6 inclusive</p>
+              <p>Returns a Big number whose value is the value of this Big number raised to the power <code>n</code>.</p>
+              <p>Here, <code>n</code> must be a JavaScript number, not a Big number, because only small integers are allowed.</p>
+              <p>If <code>n</code> is negative and the result has more fraction digits than is specified by <code><a href="#dp">Big.DP</a></code>, it will be rounded to <code><a href="#dp">Big.DP</a></code> decimal places using rounding mode <code><a href="#rm">Big.RM</a></code>.</p>
+              <p>Throws if <code>n</code> is invalid.</p>
+              <p>Note: High value exponents may cause this method to be slow to return.</p>
+              <pre>Math.pow(0.7, 2)           // 0.48999999999999994
+    x = new Big(0.7)
+    x.pow(2)                   // '0.49'
+    Big.DP = 20
+    Big(3).pow(-2)             // '0.11111111111111111111'
+    
+    new Big(123.456).pow(1000).toString().length     // 5099
+    new Big(2).pow(1e+6)       // Time taken (Node.js): 9 minutes 34 secs.</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="prec">
+            <header>prec</header>
+            <article>			
+              <p>
+                <code>.prec(sd, rm)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>Big</em>
+              </p>
+              <p><code>sd</code>? : <em>number</em> : integer, 1 to 1e+6 inclusive</p>
+              <p><code>rm</code>? : <em>number</em> : 0, 1, 2, or 3</p>
+              <p>Returns a Big number whose value is the value of this Big number rounded to a maximum precision of <code>sd</code> significant digits using rounding mode <code>rm</code>, or <code><a href="#rm">Big.RM</a></code> if <code>rm</code> is omitted or undefined.</p>
+              <p>Throws if <code>sd</code> or <code>rm</code> is invalid.</p>
+              <pre>down = 0
+    half_up = 1
+    x = new Big('9876.54321')
+    x.prec(2)                 // '9900'
+    x.prec(7)                 // '9876.543'
+    x.prec(20)                // '9876.54321'
+    x.prec(1, down)           // '9000'
+    x.prec(1, half_up)        // '10000'
+    x                         // '9876.54321'</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="round">
+            <header>round</header>
+            <article>			
+              <p>
+                <code>.round(dp, rm)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>Big</em>
+              </p>
+              <p><code>dp</code>? : <em>number</em> : integer, -1e+6 to 1e+6 inclusive</p>
+              <p><code>rm</code>? : <em>number</em> : 0, 1, 2, or 3</p>
+              <p>Returns a Big number whose value is the value of this Big number rounded using rounding mode <code>rm</code> to a maximum of <code>dp</code> decimal places, or, if <code>dp</code> is negative, to an integer which is a multiple of <code>10**-dp</code>.</p>
+              <ul>
+                <li>if <code>dp</code> is omitted or is undefined, the return value is the value of this Big number rounded to a whole number.</li>
+                <li>if <code>rm</code> is omitted or is undefined, the current <code><a href="#rm">Big.RM</a></code> setting is used.</li>
+              </ul>
+              <p>Throws if <code>dp</code> or <code>rm</code> is invalid.</p>
+              <pre>down = 0
+    half_up = 1
+    half_even = 2
+    up = 3
+    
+    x = 123.45
+    Math.round(x)              // 123
+    
+    y = new Big(x)
+    y.round()                  // '123'
+    y.round(2)                 // '123.45'
+    y.round(10)                // '123.45'
+    y.round(1, down)           // '123.4'
+    y.round(1, half_up)        // '123.5'
+    y.round(1, half_even)      // '123.4'
+    y.round(1, up)             // '123.5'
+    y.round(-1, down)          // '120'
+    y.round(-2, up)            // '200'
+    y                          // '123.45'</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="sqrt">
+            <header>sqrt</header>
+            <article>			
+              <p>
+                <code>.sqrt()</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>Big</em>
+              </p>
+              <p>Returns a Big number whose value is the square root of this Big number.</p>
+              <p>If the result has more fraction digits than is specified by <code><a href="#dp">Big.DP</a></code>, it will be rounded to <code><a href="#dp">Big.DP</a></code> decimal places using rounding mode <code><a href="#rm">Big.RM</a></code>.</p>
+              <p>Throws if this Big number is negative.</p>
+              <pre>x = new Big(16)
+    x.sqrt()                   // '4'
+    y = new Big(3)
+    y.sqrt()                   // '1.73205080756887729353'</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="times">
+            <header>times</header>
+            <article>			
+              <p>
+                <code>.times(n)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>Big</em>
+              </p>
+              <p><code>n</code> : <em>number</em> | <em>string</em> | <em>Big</em></p>
+              <p>Returns a Big number whose value is the value of this Big number times <code>n</code>.</p>
+              <p>Throws if <code>n</code> is invalid.</p>
+              <pre>0.6 * 3                    // 1.7999999999999998
+    x = new Big(0.6)
+    y = x.times(3)             // '1.8'
+    Big('7e+500').times(y)     // '1.26e+501'</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="toExponential">
+            <header>toExponential</header>
+            <article>			
+              <p>
+                <code>.toExponential(dp)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>string</em>
+              </p>
+              <p><code>dp</code>? : <em>number</em>: integer, 0 to 1e+6 inclusive</p>
+              <p>Returns a string representing the value of this Big number in exponential notation to a fixed number of <code>dp</code> decimal places.</p>
+              <p>If the value of this Big number in exponential notation has more digits to the right of the decimal point than is specified by <code>dp</code>, the return value will be rounded to <code>dp</code> decimal places using rounding mode <code><a href="#rm">Big.RM</a></code>.</p>
+              <p>If the value of this Big number in exponential notation has fewer digits to the right of the decimal point than is specified by <code>dp</code>, the return value will be appended with zeros accordingly.</p>
+              <p>If <code>dp</code> is omitted or is undefined, the number of digits after the decimal point defaults to the minimum number of digits necessary to represent the value exactly.</p>
+              <p>Throws if <code>dp</code> is invalid.</p>
+              <pre>x = 45.6
+    y = new Big(x)
+    x.toExponential()          // '4.56e+1'
+    y.toExponential()          // '4.56e+1'
+    x.toExponential(0)         // '5e+1'
+    y.toExponential(0)         // '5e+1'
+    x.toExponential(1)         // '4.6e+1'
+    y.toExponential(1)         // '4.6e+1'
+    x.toExponential(3)         // '4.560e+1'
+    y.toExponential(3)         // '4.560e+1'
+    </pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="toFixed">
+            <header>toFixed</header>
+            <article>			
+              <p>
+                <code>.toFixed(dp)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>string</em>
+              </p>
+              <p><code>dp</code>? : <em>number</em>: integer, 0 to 1e+6 inclusive</p>
+              <p>Returns a string representing the value of this Big number in normal notation to a fixed number of <code>dp</code> decimal places.</p>
+    
+              <p>If the value of this Big number in normal notation has more digits to the right of the decimal point than is specified by <code>dp</code>, the return value will be rounded to <code>dp</code> decimal places using rounding mode <code><a href="#rm">Big.RM</a></code>.</p>
+    
+              <p>If the value of this Big number in normal notation has fewer fraction digits then is specified by <code>dp</code>, the return value will be appended with zeros accordingly.</p>
+    
+              <p>Unlike <code>Number.prototype.toFixed</code>, which returns exponential notation if a number is greater or equal to 10<sup>21</sup>, this method will always return normal notation.</p>
+    
+              <p>If <code>dp</code> is omitted or is undefined, the return value is simply the value in normal notation. This is also unlike <code>Number.prototype.toFixed</code>, which returns the value to zero decimal places.</p>
+    
+              <p>Throws if <code>dp</code> is invalid.</p>
+              <pre>x = 45.6
+    y = new Big(x)
+    x.toFixed()                // '46'
+    y.toFixed()                // '45.6'
+    y.toFixed(0)               // '46'
+    x.toFixed(3)               // '45.600'
+    y.toFixed(3)               // '45.600'</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="toJSON">
+            <header>toJSON</header>
+            <article>			
+              <p>
+                <code>.toJSON()</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>string</em>
+                <p>As <code><a href="#toString">toString</a></code>.</p>
+                <pre>x = new Big('177.7e+457')
+    y = new Big(235.4325)
+    z = new Big('0.0098074')
+    str = JSON.stringify( [x, y, z] )
+    
+    JSON.parse(str, function (k, v) { return k === '' ? v : new Big(v) })
+    // Returns an array of three Big numbers.</pre>
+              </p>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="toPrecision">
+            <header>toPrecision</header>
+            <article>			
+              <p>
+                <code>.toPrecision(sd)</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>string</em>
+              </p>
+              <p><code>sd</code>? : <em>number</em>: integer, 1 to 1e+6 inclusive</p>
+              <p>Returns a string representing the value of this Big number to the specified number of <code>sd</code> significant digits.</p>
+              <p>If the value of this Big number has more digits than is specified by <code>sd</code>, the return value will be rounded to <code>sd</code> significant digits using rounding mode <code><a href="#rm">Big.RM</a></code>.</p>
+              <p>If the value of this Big number has fewer digits than is specified by <code>sd</code>, the return value will be appended with zeros accordingly.</p>
+              <p>If <code>sd</code> is less than the number of digits necessary to represent the integer part of the value in normal notation, exponential notation is used.</p>
+              <p>If <code>sd</code> is omitted or is undefined, the return value is the same as <code><a href="#toString">.toString()</a></code>.</p>
+              <p>Throws if <code>sd</code> is invalid.</p>
+              <pre>x = 45.6
+    y = new Big(x)
+    x.toPrecision()            // '45.6'
+    y.toPrecision()            // '45.6'
+    x.toPrecision(1)           // '5e+1'
+    y.toPrecision(1)           // '5e+1'
+    x.toPrecision(5)           // '45.600'
+    y.toPrecision(5)           // '45.600'</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="toNumber">
+            <header>toNumber</header>
+            <article>			
+              <p>
+                <code>.toNumber()</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>number</em>
+              </p>
+              <p>Returns a primitive number representing the value of this Big number.</p>
+              <pre>x = new Big('123.45')
+    x.toNumber()               // 123.45
+    y = new Big('1.0000000000000000001')
+    y.toNumber()               // 1</pre>
+              <p>If <code><a href="#strict">Big.strict</a></code> is <code>true</code> an error will be thrown if <code>toNumber</code> is called on a Big number which cannot be converted to a primitive number without a loss of precision.</p>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="toString">
+            <header>toString</header>
+            <article>			
+              <p>
+                <code>.toString()</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>string</em>
+              </p>
+              <p>Returns a string representing the value of this Big number.</p>
+              <p>If this Big number has a positive exponent that is equal to or greater than 21, or a negative exponent equal to or less than -7, exponential notation is returned.</p>
+              <p>The point at which <code>toString</code> returns exponential rather than normal notation can be adjusted by changing the value of <code><a href="#pe">Big.PE</a></code> and <code><a href="#ne">Big.NE</a></code>. By default, Big numbers correspond to JavaScript's number type in this regard.</p>
+              <pre>x = new Big('9.99e+20')
+    x.toString()               // '999000000000000000000'
+    y = new Big('1E21')
+    y.toString()               // '1e+21'</pre>
+            </article>
+        </section>
+        
+        <section class="sub-section" id="valueOf">
+            <header>valueOf</header>
+            <article>			
+              <p>
+                <code>.valueOf()</code>&emsp;<i class="fas fa-long-arrow-alt-right"></i>&emsp;<em>string</em>
+              </p>
+              <p>As <code><a href="#toString"></a></code> except the minus sign is included for negative zero.</p>
+              <pre>x = new Big(-0)
+    x.valueOf()                 // '-0'
+    x.toString()                // '0'</pre>
+              <p>To prevent accidental usage of Big numbers with arithmetic operators, if <code><a href="#strict">Big.strict</a></code> is <code>true</code> any explicit or implicit calls to <code>valueOf</code> will result in an error.</p>
+            </article>
+        </section>
+      </section>
+      
+      <section class="main-section" id="instance_properties">
+        <header>Instance Properties</header>
+        <section class="sub-section" id="properties">
+          <article>
+            <p>A Big number is an object with three properties:</p>
+            <div class="grid-table" id="props-grid-table">
+              <div class="col-title" id="property">Property</div>
+              <div class="col-title" id="description">Description</div>
+              <div class="col-title" id="type">Type</div>
+              <div class="col-title" id="prop-value">Value</div>
+              <div class="col-value" id="c-prop">c</div>
+              <div class="col-value" id="c-desc">coefficient*</div>
+              <div class="col-value" id="c-type"><em>number</em>[]</div>
+              <div class="col-value" id="c-value">Array of single digits</div>
+              <div class="col-value" id="e-prop">e</div>
+              <div class="col-value" id="e-desc">exponent</div>
+              <div class="col-value" id="e-type"><em>number</em></div>
+              <div class="col-value" id="e-value">Integer, -1e+6 to 1e+6 inclusive</div>
+              <div class="col-value" id="s-prop">s</div>
+              <div class="col-value" id="s-desc">sign</div>
+              <div class="col-value" id="s-type"><em>number</em></div>
+              <div class="col-value" id="s-value">-1 or 1</div>
+            </div>
+            <p><sup>*</sup>significand</p>
+            <p>The value of a Big number is stored in a normalised decimal floating point format which corresponds to the value's <code><a href="#toExponential">toExponential</a></code> form, with the decimal point to be positioned after the most significant (left-most) digit of the coefficient.</p>
+            <p>Note that, as with JavaScript numbers, the original exponent and fractional trailing zeros are not preserved.</p>
+            <pre>x = new Big(0.123)                 // '0.123'
+    x.toExponential()                  // '1.23e-1'
+    x.c                                // '1,2,3'
+    x.e                                // -1
+    x.s                                // 1
+    
+    y = new Number(-123.4567000e+2)    // '-12345.67'
+    y.toExponential()                  // '-1.234567e+4'
+    z = new Big('-123.4567000e+2')     // '-12345.67'
+    z.toExponential()                  // '-1.234567e+4'
+    z.c                                // '1,2,3,4,5,6,7'
+    z.e                                // 4
+    z.s                                // -1</pre>
+            <p>A Big number is mutable in the sense that the value of its properties can be changed.</p>
+            <p>For example, to rapidly shift a value by a power of 10:</p>
+            <pre>x = new Big('1234.000')    // '1234'
+    x.toExponential()          // '1.234e+3'
+    x.c                        // '1,2,3,4'
+    x.e                        // 3
+    
+    x.e = -5
+    x                          // '0.00001234'</pre>
+            <p>If changing the coefficient array directly, which is not recommended, be careful to avoid leading or trailing zeros (unless zero itself is being represented).</p>
+            <p>Minus zero is a valid Big number value, but like JavaScript numbers the minus sign is not shown by <code><a href="#toString">toString</a></code>.</p>
+            <pre>x = new Number(-0)         // 0
+    1 / x == -Infinity         // true
+    
+    y = new Big(-0)            // '0'
+    y.c                        // '0'    [0].toString()
+    y.e                        // 0
+    y.s                        // -1</pre>
+          </article>
+        </section>		
+      </section>
+      
+      <section class="main-section" id="errors">
+        <header>Errors</header>
+        <section class="sub-section" id="errors-description">
+          <article>
+            <p>The errors that are thrown are instances of <code>Error</code>.</p>
+            <p>The <code>message</code> of the errors always begins with <code>[big.js]</code>, for example:</p>
+            <pre>Error: [big.js] Invalid value</pre>
+            <div class="grid-table" id="errors-grid-table">
+              <div class="col-title" id="methods">Method(s)</div>
+              <div class="col-title" id="message">Error message</div>
+              <div class="col-title" id="throws-when">Throws on/when</div>
+              <div class="col-value" id="methods1">
+                <ul>
+                  <li><code>Big</code></li>
+                  <li><code>cmp</code></li>
+                  <li><code>div</code></li>
+                  <li><code>eq gt gte lt lte</code></li>
+                  <li><code>minus</code></li>
+                  <li><code>mod</code></li>
+                  <li><code>plus</code></li>
+                  <li><code>times</code></li>
+                </ul>
+              </div>
+              <div class="col-value" id="error1a">
+                <p>Invalid value</p>
+              </div>
+              <div class="col-value" id="error1b">
+                <p>String expected</p>
+              </div>
+              <div class="col-value" id="throw1a">
+                <p>Invalid value</p>
+              </div>
+              <div class="col-value" id="throw1b">
+                <p><code>Big.strict</code> is <code>true</code></p>
+              </div>
+              <div class="col-value" id="methods2">
+                <code>div</code>
+              </div>
+              <div class="col-value" id="error2a"><p>Division by zero</p></div>
+              <div class="col-value" id="error2b"><p>Invalid decimal places</p></div>
+              <div class="col-value" id="error2c"><p>Invalid rounding mode</p></div>
+              <div class="col-value" id="throw2a"><p>Division by zero</p></div>
+              <div class="col-value" id="throw2b"><p>Invalid <code>Big.DP</code></p></div>
+              <div class="col-value" id="throw2c"><p>Invalid <code>Big.RM</code></p></div>
+              <div class="col-value" id="methods3"><code>mod</code></div>
+              <div class="col-value" id="error3"><p>Division by zero</p></div>
+              <div class="col-value" id="throw3"><p>Modulo zero</p></div>
+              <div class="col-value" id="methods4"><code>pow</code></div>
+              <div class="col-value" id="error4a"><p>Invalid exponent</p></div>
+              <div class="col-value" id="error4b"><p>Invalid decimal places</p></div>
+              <div class="col-value" id="error4c"><p>Invalid rounding mode</p></div>
+              <div class="col-value" id="throw4a"><p>Invalid exponent</p></div>
+              <div class="col-value" id="throw4b"><p>Invalid <code>Big.DP</code></p></div>
+              <div class="col-value" id="throw4c"><p>Invalid <code>Big.RM</code></p></div>
+              <div class="col-value" id="methods5"><code>prec</code></div>
+              <div class="col-value" id="error5a"><p>Invalid precision</p></div>
+              <div class="col-value" id="error5b"><p>Invalid rounding mode</p></div>
+              <div class="col-value" id="throw5a"><p>Invalid <code>sd</code></p></div>
+              <div class="col-value" id="throw5b"><p>Invalid <code>rm</code>/<code>Big.RM</code></p></div>
+              <div class="col-value" id="methods6"><code>round</code></div>
+              <div class="col-value" id="error6a"><p>Invalid decimal places	</p></div>
+              <div class="col-value" id="error6b"><p>Invalid rounding mode</p></div>
+              <div class="col-value" id="throw6a"><p>Invalid <code>dp</code></p></div>
+              <div class="col-value" id="throw6b"><p>Invalid <code>rm</code>/<code>Big.RM</code></p></div>
+              <div class="col-value" id="methods7"><code>sqrt</code></div>
+              <div class="col-value" id="error7a"><p>No square root</p></div>
+              <div class="col-value" id="error7b"><p>Invalid decimal places</p></div>
+              <div class="col-value" id="error7c"><p>Invalid rounding mode</p></div>
+              <div class="col-value" id="throw7a"><p>Negative number</p></div>
+              <div class="col-value" id="throw7b"><p>Invalid <code>Big.DP</code></p></div>
+              <div class="col-value" id="throw7c"><p>Invalid <code>Big.RM</code></p></div>
+              <div class="col-value" id="methods8"><code>toExponential</code></div>
+              <div class="col-value" id="error8a"><p>Invalid decimal places	</p></div>
+              <div class="col-value" id="error8b"><p>Invalid rounding mode</p></div>
+              <div class="col-value" id="throw8a"><p>Invalid <code>dp</code></p></div>
+              <div class="col-value" id="throw8b"><p>Invalid <code>Big.RM</code></p></div>
+              <div class="col-value" id="methods9"><code>toFixed</code></div>
+              <div class="col-value" id="error9a"><p>Invalid decimal places</p></div>
+              <div class="col-value" id="error9b"><p>Invalid rounding mode</p></div>
+              <div class="col-value" id="throw9a"><p>Invalid <code>dp</code></p></div>
+              <div class="col-value" id="throw9b"><p>Invalid <code>Big.RM</code></p></div>
+              <div class="col-value" id="methods10"><code>toNumber</code></div>
+              <div class="col-value" id="error10"><p>Imprecise conversion</p></div>
+              <div class="col-value" id="throw10"><p><code>Big.strict</code> is <code>true</code></p></div>
+              <div class="col-value" id="methods11"><code>toPrecision</code></div>
+              <div class="col-value" id="error11a"><p>Invalid precision</p></div>
+              <div class="col-value" id="error11b"><p>Invalid rounding mode</p></div>
+              <div class="col-value" id="throw11a"><p>Invalid <code>sd</code></p></div>
+              <div class="col-value" id="throw11b"><p>Invalid <code>Big.RM</code></p></div>
+              <div class="col-value" id="methods12"><code>valueOf</code></div>
+              <div class="col-value" id="error12"><p>valueOf disallowed</p></div>
+              <div class="col-value" id="throw12"><p><code>Big.strict</code> is <code>true</code></p></div>
+            </div>
+          </article>
+        </section>
+      </section>
+    
+    </main>
+    </div>
+  </body>
+</html>
